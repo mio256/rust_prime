@@ -1,30 +1,29 @@
-def if_prime(n):
-    if n==0 or n==1:
-        return False
-    elif n==2:
-        return True
-    else:
-        i=2
-        while i<n:
-            if n%i==0:
-                return False
-            i+=1
-        return True
-
-
 import time
+import math
 
-time_sta = time.time()
+def is_prime(x):
+    if x < 2:
+        return False
+    if x == 2:
+        return True
+    if x % 2 == 0:
+        return False
 
-cnt=0
-for i in range(100000):
-    if if_prime(i):
-        # print(f'{i}')
-        cnt+=1
-print(f'cnt={cnt}')
+    prime = 3
+    while prime <= math.sqrt(x):
+        if x % prime == 0:
+            return False
+        prime += 2
 
-time_end = time.time()
+    return True
 
-tim = time_end- time_sta
 
-print(tim)
+if __name__ == '__main__':
+    time_sta = time.time()
+    cnt=0
+    for i in range(1_000_000):
+        if is_prime(i):
+            cnt+=1
+    print(f'cnt:{cnt}')
+    time_end = time.time()
+    print(f'time:{time_end-time_sta}')
